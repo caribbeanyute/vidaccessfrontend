@@ -14,7 +14,8 @@ const config = {
     filename: "bundle.js",
   },
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx",".css"],
+  
   },
   module: {
     rules: [
@@ -23,6 +24,15 @@ const config = {
         use: "babel-loader",
         exclude: /node_modules/,
       },
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+    },
+    {
+      test: /\.css$/,
+      use: [ 'style-loader', 'css-loader' ]
+    }
     ],
   },
   plugins: [
