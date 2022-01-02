@@ -2,6 +2,7 @@ import React from "react";
 import VideoJS  from "./components/VideoJS";
 
 // TODO: SETUP types for this component
+// TODO: Setup unit tests
 const App: React.FC = (props) => {
 
   const playerRef = React.useRef(null);
