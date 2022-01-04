@@ -1,4 +1,5 @@
-const { resolve } = require("path");
+const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 
@@ -6,16 +7,17 @@ const isProd = process.env.NODE_ENV === "production";
 
 const config = {
   mode: isProd ? "production" : "development",
+  target: process.env.NODE_ENV === "development" ? "web" : "browserslist",
   entry: {
-    index: "./src/index.tsx",
+    index: "./src/index.jsx",
   },
   output: {
-    path: resolve(__dirname, "dist"),
+    path: path.join(__dirname, 'public'),
     filename: "bundle.js",
   },
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx",".css"],
-  
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".css"],
+
   },
   module: {
     rules: [
@@ -28,19 +30,28 @@ const config = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
-    },
-    {
-      test: /\.css$/,
-      use: [ 'style-loader', 'css-loader' ]
-    }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader',
+        //MiniCssExtractPlugin.loader,,
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1
+          }
+        }, 'postcss-loader']
+      }
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
-      filename: "index.html",
-      inject: "body",
+      template: "./public/index.html",
     }),
+    //new MiniCssExtractPlugin({
+      //filename: "index.css",
+      //chunkFilename: "index.css"
+    //}),
   ],
 };
 
@@ -54,8 +65,7 @@ if (isProd) {
     open: true,
     hot: true,
     compress: true,
-    stats: "errors-only",
-    overlay: true,
+   
   };
 }
 
