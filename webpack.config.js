@@ -34,14 +34,18 @@ const config = {
       {
         test: /\.css$/,
         use: ['style-loader',
-        //MiniCssExtractPlugin.loader,,
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 1
-          }
-        }, 'postcss-loader']
-      }
+          //MiniCssExtractPlugin.loader,,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          }, 'postcss-loader']
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
@@ -49,8 +53,8 @@ const config = {
       template: "./public/index.html",
     }),
     //new MiniCssExtractPlugin({
-      //filename: "index.css",
-      //chunkFilename: "index.css"
+    //filename: "index.css",
+    //chunkFilename: "index.css"
     //}),
   ],
 };
@@ -65,7 +69,7 @@ if (isProd) {
     open: true,
     hot: true,
     compress: true,
-   
+
   };
 }
 
