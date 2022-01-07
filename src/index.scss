@@ -1,0 +1,29 @@
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts */
+@font-face {
+	font-family: "RalewayRegular";
+	src: local("RalewayRegular"),
+	 url("./fonts/raleway/Raleway-Regular.ttf") format("truetype");
+	/*font-weight: ;*/
+}
+
+
+@font-face {
+	font-family: "RalewayBold";
+	src: local("RalewayBold"),
+	 url("./fonts/raleway/Raleway-Bold.ttf") format("truetype");
+	/*font-weight: ;*/
+}
+
+.font-face-rr {
+	font-family: "RalewayRegular";
+}
+.font-face-rb {
+	font-family: "RalewayBold";
+}
+
+
