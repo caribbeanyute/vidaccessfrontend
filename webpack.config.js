@@ -32,9 +32,15 @@ const config = {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/,
-        use: ['style-loader',
-          //MiniCssExtractPlugin.loader,,
+        // Extract any CSS or SCSS content and minimize
+        test: /\.[s]?css$/,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 2 } },
+          { loader: 'postcss-loader' },
+          { loader: 'sass-loader' },
+        ]
+      },
           {
             loader: 'css-loader',
             options: {
