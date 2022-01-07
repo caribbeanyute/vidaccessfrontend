@@ -9,11 +9,12 @@ const config = {
   mode: isProd ? "production" : "development",
   target: process.env.NODE_ENV === "development" ? "web" : "browserslist",
   entry: {
-    index: "./src/index.jsx",
+    index: "./src/index.tsx",
   },
   output: {
     path: path.join(__dirname, 'public'),
     filename: "bundle.js",
+    publicPath: '/'
   },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".css"],
@@ -41,17 +42,15 @@ const config = {
           { loader: 'sass-loader' },
         ]
       },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          }, 'postcss-loader']
-      },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
+
     ],
   },
   plugins: [
@@ -75,6 +74,7 @@ if (isProd) {
     open: true,
     hot: true,
     compress: true,
+    historyApiFallback: true
 
   };
 }
