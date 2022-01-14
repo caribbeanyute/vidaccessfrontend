@@ -12,7 +12,7 @@ const config = {
     index: "./src/index.tsx",
   },
   output: {
-    path: path.join(__dirname, 'public'),
+    path: path.join(__dirname, 'build'),
     filename: "bundle.js",
     publicPath: '/'
   },
@@ -66,6 +66,7 @@ const config = {
 
 if (isProd) {
   config.optimization = {
+    minimize: true,
     minimizer: [new TerserWebpackPlugin()],
   };
 } else {
