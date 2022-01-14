@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "IE 10"
+  ],
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve",
     "build": "cross-env NODE_ENV=production webpack",
