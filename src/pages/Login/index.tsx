@@ -19,8 +19,8 @@ type InputProps = {
 				<div className='bg-white pl-20 pt-40 h-screen '>
 					<div className='font-face-rb text-gray-500 text-xs'>VIDEO ACCESS</div>
 					<div className='font-face-rb text-black text-4xl pt-4'>Login</div>
-					<Input label='username'/>
-					<Input label='password'/>
+					<Input label='username' onChangeText={(text: string) => setUserName(text)} />
+					<Input label='password' type='password' onChangeText={(text: string) => setPassword(text)} />
 				</div>
 				<div className='red flex w-full'>
 					<img className='px-20' src={mediaplayer} alt="Logo" />
