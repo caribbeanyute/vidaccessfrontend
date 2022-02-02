@@ -1,5 +1,5 @@
 import React from "react";
-import VideoJS  from "./components/VideoJS";
+import VideoJS  from "./components/video/VideoJS";
 
 // TODO: SETUP types for this component
 // TODO: Setup unit tests
