@@ -71,11 +71,20 @@ if (isProd) {
   };
 } else {
   config.devServer = {
+    allowedHosts: 'all',
+    host:'local-ipv4',
     port: 9000,
     open: true,
     hot: true,
     compress: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      "/api/**": {
+        target: "http://localhost:8080",
+        secure: false,
+        changeOrigin: true,
+      }
+    }
 
   };
 }
