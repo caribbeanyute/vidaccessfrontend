@@ -72,7 +72,7 @@ if (isProd) {
 } else {
   config.devServer = {
     allowedHosts: 'all',
-    host:'local-ipv4',
+    host:'::',
     port: 9000,
     open: true,
     hot: true,
