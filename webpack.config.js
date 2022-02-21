@@ -72,12 +72,18 @@ if (isProd) {
 } else {
   config.devServer = {
     allowedHosts: 'all',
-    host:'::',
-    port: 9000,
+    host: '0.0.0.0',
+    port: 3000,
     open: true,
     hot: true,
     compress: true,
     historyApiFallback: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+    client: {
+      webSocketURL: "auto://0.0.0.0:0/ws",
+    },
     proxy: {
       "/api/**": {
         target: "http://localhost:8080",
