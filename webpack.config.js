@@ -43,7 +43,7 @@ const config = {
         ]
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
         type: 'asset/resource',
       },
       {
@@ -56,6 +56,7 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
+      favicon: './public/favicon.ico'
     }),
     //new MiniCssExtractPlugin({
     //filename: "index.css",
