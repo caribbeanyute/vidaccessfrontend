@@ -31,7 +31,7 @@ const App: React.FC = (props) => {
     responsive: true,
     fluid: true,
     sources: [{
-      src: 'http://localhost:7002/live/movie.m3u8',
+      src: 'https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8',
       type: 'application/x-mpegURL'
     }]
   }
