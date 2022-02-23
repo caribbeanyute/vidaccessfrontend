@@ -1,10 +1,8 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState} from "react";
 import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
 	Link,
-	Outlet
+	Outlet,
+	useLocation
 } from "react-router-dom";
 
 import logo from "../../assets/img/streamaccess-logos/streamaccess-logos-transparent.png";
@@ -23,17 +21,24 @@ const navItems = [
 	{
 		label: "Video Sources",
 		icon: () => <Video className="" size={iconSize} color="white" />,
-		path: "/home"
+		path:  ""
 	},
 	{
 		label: "Audio Sources",
 		icon: () => <Music className="" size={iconSize} color="white" />,
-		path: "/home"
-	}, {
+		path: ""
+	}, 
+	{
 		label: "Manage Source",
 		icon: () => <Settings className="" size={iconSize} color="white" />,
-		path: "/home"
+		path: <Link to="/app">My Profile</Link>
 	},
+	{
+		label: "App",
+		icon: () => <Settings className="" size={iconSize} color="white" />,
+		path: <Link to="/app">My Profile</Link>
+	},
+
 
 ];
 
@@ -42,20 +47,18 @@ const navItems = [
 
 type NavButtonProps = {
 	label: string,
-	path: string,
+	path: () => React.ReactNode,
 	icon: () => React.FC
 }
 
-const NavButton: FC<NavButtonProps> = ({ label, path = 'text', icon }: NavButtonProps) => {
+const NavButton: FC<NavButtonProps> = ({ label, path, icon }: NavButtonProps) => {
 	return (
 		<button className="navButton bg-blackBg hover:bg-darkslategray rounded-lg
 		hover:shadow flex flex-row items-center content-center px-2 mx-2 py-2 m-2">
 			<div className="pr-1">
 				{icon()}
-				{//<Home className="" size={20} color="white"/>
-				}
 			</div>
-			<div className="navButtonText text-white text-center text-xs pl-6 ">{label}</div>
+			<div className="navButtonText text-white text-center text-xs pl-4 ">{path}</div>
 		</button>
 	)
 }
@@ -72,17 +75,19 @@ export default function SidebarExample() {
 					<img style={{
 						"objectFit": "contain"
 					}} src={logo} alt="Logo" />
+					
 				</div>
 
 
-				<div className="navItems flex flex-col">
+				<nav className="navItems flex flex-col">
 					{
 						navItems.map((navItem, indx) => (
-							<NavButton key={indx} label={navItem.label} icon={navItem.icon}></NavButton>
+							<NavButton key={indx} label={navItem.label} icon={navItem.icon} path={navItem.path}>
+							</NavButton>
 						))
 					}
 
-				</div>
+				</nav>
 
 			</div>
 			<div className="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">

@@ -16,14 +16,22 @@ import './index.scss';
 
 import { store } from './state';
 
+
+
 const Index = () => (
-	
+
 	<Provider store={store}>
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Login></Login>} />
-				<Route path="/app" element={<App></App>} />
-				<Route path="/nav" element={<SidebarExample></SidebarExample>} />
+				<Route path="/login" element={<Login />} />
+				{//<Route path="/app" element={<App/>} />
+				}
+				<Route path="/" element={<SidebarExample />} >
+					<Route path="/app" element={<App/>}>
+
+					</Route>
+
+				</Route>
 				<Route path="*" element={"Not Found"}></Route>
 			</Routes>
 		</BrowserRouter>
