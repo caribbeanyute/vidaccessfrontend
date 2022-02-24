@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from 'react-redux';
 import App from "./App";
 import Login from './pages/Login';
+import Welcome from "./pages/Welcome";
 import SidebarExample from "./components/sidebar/sidebar";
 import axios from "axios";
 
@@ -27,6 +28,7 @@ const Index = () => (
 				{//<Route path="/app" element={<App/>} />
 				}
 				<Route path="/" element={<SidebarExample />} >
+					<Route index={true} element={<Welcome />} />
 					<Route path="/app" element={<App/>}>
 
 					</Route>
