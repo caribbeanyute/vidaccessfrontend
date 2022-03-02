@@ -18,6 +18,7 @@ const config = {
   },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".css"],
+    modules: ['node_modules', path.join(__dirname, 'src')],
 
   },
   module: {
@@ -87,9 +88,12 @@ if (isProd) {
     },
     proxy: {
       "/api/**": {
-        target: "http://localhost:8080",
+        target: "http://172.23.176.1:8082/",
         secure: false,
         changeOrigin: true,
+        pathRewrite: {"^/api":"" }
+        //rewrite: function (path, req) { return path.replace(/\/(.*?)/g, '') }
+
       }
     }
 
