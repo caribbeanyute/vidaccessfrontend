@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import App from "./App";
 import Login from './pages/Login';
 import Welcome from "./pages/Welcome";
-import SidebarExample from "./components/sidebar/sidebar";
+import Sidebar from "./components/sidebar/sidebar";
 import axios from "axios";
 
 
@@ -27,7 +27,7 @@ const Index = () => (
 				<Route path="/login" element={<Login />} />
 				{//<Route path="/app" element={<App/>} />
 				}
-				<Route path="/" element={<SidebarExample />} >
+				<Route path="/" element={<Sidebar />} >
 					<Route index={true} element={<Welcome />} />
 					<Route path="/app" element={<App/>}>
 
