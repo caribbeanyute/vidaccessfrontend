@@ -3,19 +3,23 @@ import { combineReducers } from 'redux';
 import AuthReducer from './auth';
 import LoginUIReducer from './loginUI';
 import StreamReducer from './stream'
+import videoJSReducer from './videoJS'
 
 const reducers = {
   auth: AuthReducer,
   loginUIReducer: LoginUIReducer,
-  stream: StreamReducer
+  stream: StreamReducer,
+  videoJS: videoJSReducer 
 };
 
 const combinedReducer = combineReducers(reducers);
 
-export interface IReduxState {
+export interface RootState {
   auth: ReturnType<typeof AuthReducer>;
   loginUIReducer: ReturnType<typeof LoginUIReducer>
   stream : ReturnType<typeof StreamReducer>
+  videoJS : ReturnType<typeof videoJSReducer>
 }
+
 
 export default combinedReducer;

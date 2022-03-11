@@ -4,15 +4,6 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import rootReducer from './reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-// import {authReducer} from './auth/reducer';
-// Root Reducer
-// const rootReducer = combineReducers({
-//   // authReducer,
-// });
-
-/**
- * Store configuration
- */
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
