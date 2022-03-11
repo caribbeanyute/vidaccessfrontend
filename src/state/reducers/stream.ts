@@ -3,7 +3,7 @@ import { SET_CURRENT_STREAM, UNSET_CURRENT_STREAM, SET_STREAMS, LOADING_STREAMS,
 
 const initialState = {
 	current_stream: {},
-	streams: {},
+	streams: [],
 	error: false,
 	loading: false
 }
@@ -13,7 +13,7 @@ export default function (state = initialState, action: any) {
 		case SET_CURRENT_STREAM:
 			return {
 				...state,
-				loading: true
+				current_stream: action.payload
 			};
 		case UNSET_CURRENT_STREAM:
 			return initialState;
@@ -21,8 +21,7 @@ export default function (state = initialState, action: any) {
 			return {
 				authenticated: true,
 				loading: false,
-				streams : action.payload.streams,
-				...action.payload
+				streams : action.payload,
 			};
 		case LOADING_STREAMS:
 			return {
