@@ -2,8 +2,9 @@ import React from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "./videojs"
+import { connect } from 'react-redux';
 
-export const VideoJS = ( props ) => {
+const VideoJS = ( props ) => {
 
   const videoRef = React.useRef(null);
   const playerRef = React.useRef(null);
@@ -47,3 +48,6 @@ export const VideoJS = ( props ) => {
 }
 
 export default VideoJS;
+
+
+

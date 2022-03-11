@@ -1,6 +1,7 @@
 import React from "react";
 import VideoJS  from "./components/video/VideoJS";
-
+import { useDispatch, useSelector} from 'react-redux'
+import RootState from "state/reducers/index";
 
 const Index = () => {
 	return <div className="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
@@ -22,6 +23,8 @@ const Index = () => {
 // TODO: SETUP types for this component
 // TODO: Setup unit tests
 const App: React.FC = (props) => {
+  const dispatch = useDispatch();
+	const videoJSConfig = useSelector((state: RootState) => state.videoJS);
 
   const playerRef = React.useRef(null);
 
@@ -61,9 +64,7 @@ const App: React.FC = (props) => {
 
   return (
     <>
-    <Index></Index>
-
-      <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+      <VideoJS options={videoJSConfig} onReady={handlePlayerReady} />
 
       <div>Rest of app here</div>
     </>
