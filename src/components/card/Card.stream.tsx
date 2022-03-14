@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { connect, MapDispatchToProps, MapStateToProps, useDispatch, useSelector } from 'react-redux';
 import { getStreams, setCurrentStream, setVideoSrc } from '../../state/actions/streamActions';
 import { Play } from 'react-feather';
+import Thumbnail from '../../components/thumbnail/thumbnail';
 
 
 type CardStreamProps = {
@@ -39,7 +40,7 @@ const CardStream: FC<CardStreamProps> = ({ stream, isLive }: CardStreamProps) =>
     <div className={`max-w-sm w-72 h-48 rounded overflow-hidden shadow-lg 
                      ${streamError ? 'border-solid border-2 border-red-400' : ''}`}
       onClick={setStream} >
-
+<Thumbnail></Thumbnail>
       <div className="relative z-0 w-full h-2/3" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
         <span className={`absolute z-10 right-0 top-2 inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white ${isLive ? 'bg-red-600' : 'bg-black'} rounded-full`}>{isLive ? 'LIVE' : 'DOWN'}</span>
         {isHovering ? stream.streamDescription : (

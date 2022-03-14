@@ -17,6 +17,7 @@ import { store } from './state';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CustomRouter } from "./utils/CustomRouter";
 import customHistory from "./utils/history";
+import routes from "./utils/routes";
 
 axios.defaults.baseURL = "/api";
 
@@ -25,12 +26,12 @@ const Index = () => (
 	<Provider store={store}>
 		<CustomRouter history={customHistory}>
 			<Routes>
-				<Route path="/login" element={<Login />} />
+				<Route path={routes.login} element={<Login />} />
 				{//<Route path="/app" element={<App/>} />
 				}
 				<Route path="/" element={<Sidebar />} >
 					<Route index={true} element={<Welcome />} />
-					<Route path="/app" element={<VideoPage />}>
+					<Route path={routes.video} element={<VideoPage />}>
 
 					</Route>
 
