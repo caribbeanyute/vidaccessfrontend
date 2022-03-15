@@ -1,9 +1,4 @@
 import React, { FC, useState } from "react";
-import {
-	Link,
-	Outlet,
-	useLocation
-} from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import './header.scss'
@@ -12,13 +7,10 @@ import { toggleSidebar } from "../../state/actions/uiActions";
 
 type HeaderProps = {
 	className?: string,
-	label: string,
-	path: string,
-	link: () => React.ReactNode,
 }
 
 
-export default function Header({ className }: HeaderProps) {
+const Header: FC<HeaderProps> = ({ className }: HeaderProps) => {
 	const dispatch = useDispatch();
 
 	const onToggleSidebar = () => {
@@ -44,3 +36,5 @@ export default function Header({ className }: HeaderProps) {
 		</nav>
 	);
 }
+
+export default Header;
