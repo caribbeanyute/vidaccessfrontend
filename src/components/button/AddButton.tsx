@@ -7,6 +7,7 @@ type AddButtonProps = {
 	href: string,
 	isActive: boolean,
 	label:string,
+	type?: string,
 	children: ReactChild | ReactChildren
 	onClick: (e: React.MouseEvent<HTMLElement>) => void
 
