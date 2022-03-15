@@ -18,6 +18,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CustomRouter } from "./utils/CustomRouter";
 import customHistory from "./utils/history";
 import routes from "./utils/routes";
+import AddStream from "./pages/AddStream";
 
 axios.defaults.baseURL = "/api";
 
@@ -32,8 +33,10 @@ const Index = () => (
 				<Route path="/" element={<Sidebar />} >
 					<Route index={true} element={<Welcome />} />
 					<Route path={routes.video} element={<VideoPage />}>
+					
 
 					</Route>
+					<Route path={routes.addStream} element={<AddStream />} />
 
 				</Route>
 				<Route path="*" element={"Not Found"}></Route>
