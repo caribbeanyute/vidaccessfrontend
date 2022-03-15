@@ -1,8 +1,11 @@
 import { LOADING_STREAMS,SET_STREAMS,ERROR_LOADING_STREAMS,SET_CURRENT_STREAM } from "../types/stream";
 import axios from "axios";
+import customHistory from "../../utils/history";
+import routes from "../../utils/routes";
 
 
-export const setCurrentStream = (currentStream) => (dispatch: any) => {
+
+export const setCurrentStream = (currentStream: any) => (dispatch: any) => {
 	dispatch({
 		type: SET_CURRENT_STREAM,
 		payload: currentStream
@@ -10,7 +13,7 @@ export const setCurrentStream = (currentStream) => (dispatch: any) => {
 
 }
 
-export const setVideoSrc = () => (dispatch:any, getState:any)=>{
+export const setVideoSrc = () => (dispatch:any, getState:any ) => {
 	const {current_stream} = getState().stream;
 	const {streamCode,streamKey} = current_stream;
 
@@ -19,10 +22,12 @@ export const setVideoSrc = () => (dispatch:any, getState:any)=>{
 	dispatch({
 		type: 'ADD_SOURCE',
 		payload: {
-			src: `rtmp://${'192.168.1.101'}:${'30787'}/${streamCode}/${streamKey}`,
+			src: `${process.env.SRS_API_URL}${streamCode}/${streamKey}.m3u8`,
 			type: 'application/x-mpegURL'
 		}
 	})
+
+	customHistory.push(routes.video)
 
 }
 export const getStreams = () => (dispatch: any) => {
