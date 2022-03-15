@@ -7,26 +7,25 @@ import {
 } from "react-router-dom";
 
 import logo from "assets/img/streamaccess-logos/streamaccess-logos-transparent.png";
-
 import { Home, Video, Music, Settings, Smile } from "react-feather";
 import './MainView.scss'
-
+import routes from "../../utils/routes";
 import Header from '../header/Header';
 
 
 const iconSize = 19;
 const navItems = [
 	{
-		label: "Dashboard",
+		label:'Home',
 		icon: () => <Home className="" size={iconSize} color="white" />,
 		path: "/",
-		link: <Link to="/">Home</Link>
+
 	},
 	{
-		label: "Video Sources",
+		label: "Video",
 		icon: () => <Video className="" size={iconSize} color="white" />,
-		path: "/app",
-		link: <Link to="/app">Video</Link>
+		path: routes.video,
+
 	}]/*,
 	{
 		label: "Audio Sources",
@@ -56,21 +55,20 @@ const navItems = [
 type NavButtonProps = {
 	label: string,
 	path: string,
-	link: () => React.ReactNode,
-	icon: () => React.ReactNode
+	icon: () => React.ReactNode,
 }
 
-const NavButton: FC<NavButtonProps> = ({ label, path, icon, link }: NavButtonProps) => {
+const NavButton: FC<NavButtonProps> = ({ label, path, icon}: NavButtonProps) => {
 	const { pathname } = useLocation();
 	console.log(pathname);
 	return (
-		<button className={`navButton  ${(pathname === path) ? "bg-slate-700" : "bg-blackBg"} hover:bg-darkslategray rounded-lg
+		<Link to={path} className={`navButton  ${(pathname === path) ? "bg-slate-700" : "bg-blackBg"} hover:bg-darkslategray rounded-lg
 		hover:shadow flex flex-row items-center content-center px-2 mx-2 py-2 m-2`}>
 			<div className="pr-1">
 				{icon()}
 			</div>
-			<div className="navButtonText text-white text-center text-xs pl-4 ">{link}</div>
-		</button>
+			<div className="navButtonText text-white text-center text-xs pl-4 ">{label}</div>
+		</Link>
 	)
 }
 
@@ -85,7 +83,7 @@ export default function MainView() {
 			
 			<div className="flex flex-grow rounded-full">
 			{ sideBarVisibility && (
-				<div style={{}} className="w-64 absolute sm:relative bg-blackBg shadow h-full flex-col justifybetween hidden sm:flex">
+				<div style={{}} className="w-64 z-20 absolute md:relative bg-blackBg shadow h-full flex-col justify-between sm:flex">
 					<div className="logo mt-5">
 						<img style={{
 							"objectFit": "contain"
@@ -111,11 +109,7 @@ export default function MainView() {
 				}
 
 				<div className="container mx-auto">
-					{/* Remove className [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
-
-						<Outlet />
-	
-
+					<Outlet />
 				</div>
 			</div>
 		</div>
