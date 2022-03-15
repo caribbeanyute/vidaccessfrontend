@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -59,6 +60,7 @@ const config = {
       template: "./public/index.html",
       favicon: './public/favicon.ico'
     }),
+    new Dotenv()
     //new MiniCssExtractPlugin({
     //filename: "index.css",
     //chunkFilename: "index.css"
@@ -88,7 +90,15 @@ if (isProd) {
     },
     proxy: {
       "/api/**": {
-        target: "http://172.23.176.1:8082/",
+        target: "http://172.25.80.1:8082/",
+        secure: false,
+        changeOrigin: true,
+        pathRewrite: {"^/api":"" }
+        //rewrite: function (path, req) { return path.replace(/\/(.*?)/g, '') }
+
+      },
+      "/thumbnail": {
+        target: "http://172.25.80.1:3001/api/",
         secure: false,
         changeOrigin: true,
         pathRewrite: {"^/api":"" }
