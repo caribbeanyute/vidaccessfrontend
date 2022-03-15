@@ -12,11 +12,11 @@ http {
             try_files $uri /index.html;
         }
         location /api/ {
-            proxy_pass  http://172.25.80.1:8082/;
+            proxy_pass ${SRS_API_URL};
         }
 		
 		location /thumbnail/ {
-            proxy_pass http://172.25.80.1:3001/api/thumbnail;
+            proxy_pass ${FF_API_HOST}:${FF_API_PORT}/api/thumbnail;
         }
 
         resolver 127.0.0.11;
