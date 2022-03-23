@@ -1,12 +1,20 @@
 version: "3.9"
 
+
 services:
     app:
-        container_name: vidaccess
-        image: streamaccessspa
+        container_name: streamaccess-spa
+        image: streamaccess-spa
         build:
             context: .
             dockerfile: Dockerfile
+            
+        environment:
+            - SA_API_URL=${SA_API_URL}
+            - SRS_API_URL=${SRS_API_URL}
+            - FF_API_HOST=${FF_API_HOST}
+            - FF_API_PORT=${FF_API_PORT}
+            - SRS_PUBLISH_URL=${SRS_PUBLISH_URL}
         restart: always
         ports:
           - "8081:8080"
