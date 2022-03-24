@@ -8,7 +8,8 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-            
+        env_file:
+            - .env    
         environment:
             - SA_API_URL=${SA_API_URL}
             - SRS_API_URL=${SRS_API_URL}
