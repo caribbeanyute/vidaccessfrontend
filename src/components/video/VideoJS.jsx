@@ -1,7 +1,7 @@
 import React from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import "./videojs"
+import "./videojs.style.scss"
 import { connect } from 'react-redux';
 
 const VideoJS = ( props ) => {
