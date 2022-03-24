@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { connect, MapDispatchToProps, MapStateToProps, useDispatch, useSelector } from 'react-redux';
-import mediaplayer from './images/media_player.svg'
+import { useDispatch, useSelector } from 'react-redux';
 
 import CardStream from 'components/card/Card.stream';
 import AddButton from 'components/button/AddButton';
@@ -13,12 +12,12 @@ import routes from '../../utils/routes';
 
 
 type WelcomeProps = {
-	UI: any,
+	//  UI: any,
 	//	WelcomeUser: typeof WelcomeUser,
 }
 
 
-const Welcome: React.FC<WelcomeProps> = ({ UI, ...props }: WelcomeProps) => {
+const Welcome: React.FC<WelcomeProps> = ({ ...props }: WelcomeProps) => {
 	const dispatch = useDispatch();
 	const stream = useSelector((state: RootState) => state.stream);
 
@@ -39,15 +38,12 @@ const Welcome: React.FC<WelcomeProps> = ({ UI, ...props }: WelcomeProps) => {
 				</Link>
 			</div>
 			<div className="pt-5 grid grid-cols-1 md:grid-cols-3 gap-2 justify-items-center">
-
-
 				{
-					stream.streams.map((stream, index) => (
+					stream && stream.streams.map((stream, index) => (
 
 						<CardStream className="user pt-3" key={index} isLive={stream.live} stream={stream} />
 					))
 				}
-
 
 			</div>
 		</div>
