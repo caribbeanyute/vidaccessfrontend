@@ -14,7 +14,7 @@
     "docker-build":"npm run build && docker build -t 192.168.1.101:32000/streamaccess-spa . ",
     "docker-push":"docker push 192.168.1.101:32000/streamaccess-spa",
     "test": "jest",
-    "start": "serve dist"
+    "start": "serve -s build"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",

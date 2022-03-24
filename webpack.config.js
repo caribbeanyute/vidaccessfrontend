@@ -90,7 +90,8 @@ if (isProd) {
     },
     proxy: {
       "/api/**": {
-        target: "http://172.25.80.1:8082/",
+        //target: "http://172.25.80.1:8082/",
+        target: "http://192.168.1.101:31728/",
         secure: false,
         changeOrigin: true,
         pathRewrite: {"^/api":"" }
@@ -98,7 +99,7 @@ if (isProd) {
 
       },
       "/thumbnail": {
-        target: "http://172.25.80.1:3001/api/",
+        target: "http://172.24.224.1/",
         secure: false,
         changeOrigin: true,
         pathRewrite: {"^/api":"" }

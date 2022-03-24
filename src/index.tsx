@@ -1,11 +1,15 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { render } from "react-dom";
 import { Provider } from 'react-redux';
 import App from "./App";
-import VideoPage from "./pages/Video";
-import Login from './pages/Login';
-import Welcome from "./pages/Welcome";
-import Sidebar from "./components/mainview/MainView";
+//import VideoPage from "./pages/Video";
+const VideoPage = React.lazy(() => import("./pages/Video"));
+//import Login from './pages/Login';
+const Login = React.lazy(() => import("./pages/Login"));
+//import Welcome from "./pages/Welcome";
+const Welcome = React.lazy(() => import("./pages/Welcome"));
+//import Sidebar from "./components/mainview/MainView";
+const Sidebar = React.lazy(() => import("./components/mainview/MainView"));
 import axios from "axios";
 
 
@@ -18,12 +22,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CustomRouter } from "./utils/CustomRouter";
 import customHistory from "./utils/history";
 import routes from "./utils/routes";
-import AddStream from "./pages/AddStream";
+//import AddStream from "./pages/AddStream";
+const AddStream = React.lazy(() => import("./pages/AddStream"));
 
 axios.defaults.baseURL = "/api";
 
 const Index = () => (
-
+<Suspense fallback={<div>Loading...</div>}>
 	<Provider store={store}>
 		<CustomRouter history={customHistory}>
 			<Routes>
@@ -43,6 +48,7 @@ const Index = () => (
 			</Routes>
 		</CustomRouter>
 	</Provider>
+</Suspense>
 );
 
 render(<Index />, document.getElementById('root'));
