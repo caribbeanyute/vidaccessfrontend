@@ -1,18 +1,19 @@
 import axios from 'axios';
 import { SET_USER, SET_ERRORS, LOADING_UI, CLEAR_ERRORS, SET_UNAUTHENTICATED, LOADING_USER } from '../types/auth'
+import customHistory from '../../utils/history';
 
 
-export const loginUser = (userData: any, history: any) => (dispatch: any) => {
+export const loginUser = (userData: any) => (dispatch: any) => {
 	dispatch({ type: LOADING_UI })
-	axios.post('authenticate', userData)
+	axios.post('api/auth/login', userData)
 		.then((res) => {
-			const token = `Bearer ${res.data.token}`;
-			localStorage.setItem('token', `Bearer ${res.data.token}`);//setting token to local storage
-			axios.defaults.headers.common['Authorization'] = token;//setting authorize token to header in axios
+			const token = `Bearer ${res.data["jwt-token"]}`;
+			localStorage.setItem('token', token);//setting token to local storage
+			axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
 			dispatch(getUserData());
-			dispatch({ type: CLEAR_ERRORS });
+			//dispatch({ type: CLEAR_ERRORS });
 			console.log('success');
-			history.push('/');//redirecting to index page after login success
+			customHistory.push('/');//redirecting to index page after login success
 		})
 		.catch((err) => {
 			console.log(err);
@@ -25,7 +26,7 @@ export const loginUser = (userData: any, history: any) => (dispatch: any) => {
 //for fetching authenticated user information
 export const getUserData = () => (dispatch: any) => {
 	dispatch({ type: LOADING_USER });
-	axios.get('/user')
+	axios.get('api/user/info')
 		.then(res => {
 			console.log('user data', res.data);
 			dispatch({
@@ -37,6 +38,7 @@ export const getUserData = () => (dispatch: any) => {
 		});
 }
 export const logoutUser = () => (dispatch: any) => {
+	console.log('logout');
 	localStorage.removeItem('token');
 	delete axios.defaults.headers.common['Authorization']
 	dispatch({
