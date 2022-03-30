@@ -39,11 +39,13 @@ export const getStreams = () => (dispatch: any) => {
 				type: SET_STREAMS,
 				payload: res.data
 			});
+			//dispatch({ type: CLEAR_ERRORS });
+			
 		}).catch(err => {
 			console.log(err);
 			dispatch({
 				type: ERROR_LOADING_STREAMS,
-				err: err
+				err: true
 			})
 		});
 }

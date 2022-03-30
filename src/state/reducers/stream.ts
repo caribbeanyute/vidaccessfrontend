@@ -1,5 +1,5 @@
 import { SET_USER,  LOADING_USER } from '../types/auth'
-import { SET_CURRENT_STREAM, UNSET_CURRENT_STREAM, SET_STREAMS, LOADING_STREAMS, ERROR_LOADING_STREAMS} from '../types/stream';
+import { SET_CURRENT_STREAM, UNSET_CURRENT_STREAM, SET_STREAMS, LOADING_STREAMS, ERROR_LOADING_STREAMS, CLEAR_ERROR_LOADING_STREAMS} from '../types/stream';
 
 const initialState = {
 	current_stream: {},
@@ -28,12 +28,18 @@ export default function (state = initialState, action: any) {
 				...state,
 				loading: true
 			};
+		
 	   case ERROR_LOADING_STREAMS:
 			return {
 				...state,
 				loading: false,
 				error : action.err
 			};
+		case CLEAR_ERROR_LOADING_STREAMS:
+				return {
+					...state,
+					error : false
+				};
 		default:
 			return state;
 	}
