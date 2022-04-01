@@ -2,7 +2,8 @@ import { SET_ERRORS, LOADING_UI, CLEAR_ERRORS } from '../types/auth'
 
 const initialState = {
 	loading: false,
-	errors: null
+	error: false,
+	errorStatus: undefined
 }
 
 export default function (state = initialState, action: any) {
@@ -11,13 +12,15 @@ export default function (state = initialState, action: any) {
 			return {
 				...state,
 				loading: false,
-				errors: action.payload
+				error: true,
+				errorStatus: action.payload
 			};
 		case CLEAR_ERRORS:
 			return {
 				...state,
-				loading: false,
-				errors: null
+				loading : false,
+				error : false,
+				errorStatus: undefined
 			};
 		case LOADING_UI:
 			return {
