@@ -33,19 +33,22 @@ const Welcome: React.FC<WelcomeProps> = ({ ...props }: WelcomeProps) => {
 			<div className='flex flex-row justify-items-center mt-2'>
 				<div className='font-face-rb text-black text-xl md:text-2xl place-self-start'>Streams</div>
 				<Link to={routes.addStream} className='ml-auto'>
-				<AddButton className="" label='Create Stream' >
-					</AddButton>
+					<AddButton className="" label='Create Stream' />
 				</Link>
 			</div>
-			<div className="pt-5 grid grid-cols-1 md:grid-cols-3 gap-2 justify-items-center">
-				{
-					stream && stream.streams.map((stream, index) => (
+			{stream.error ? <div className='text-red-500'>{"Failed to load Streams"}</div> : (
+				<div className="pt-5 grid grid-cols-1 md:grid-cols-3 gap-2 justify-items-center">
+					{
+						stream && stream.streams.map((stream, index) => (
 
-						<CardStream className="user pt-3" key={index} isLive={stream.live} stream={stream} />
-					))
-				}
+							<CardStream className="user pt-3" key={index} isLive={stream.live} stream={stream} />
+						))
+					}
 
-			</div>
+				</div>)
+
+			}
+
 		</div>
 	)
 }
