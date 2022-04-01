@@ -4,8 +4,10 @@ import customHistory from '../../utils/history';
 
 
 export const loginUser = (userData: any) => (dispatch: any) => {
+	dispatch({ type: CLEAR_ERRORS })
 	dispatch({ type: LOADING_UI })
-	axios.post('api/auth/login', userData)
+
+	axios.post('api/auth/login', userData, {timeout:5000})
 		.then((res) => {
 			const token = `Bearer ${res.data["jwt-token"]}`;
 			localStorage.setItem('token', token);//setting token to local storage
@@ -13,14 +15,32 @@ export const loginUser = (userData: any) => (dispatch: any) => {
 			dispatch(getUserData());
 			//dispatch({ type: CLEAR_ERRORS });
 			console.log('success');
-			customHistory.push('/');//redirecting to index page after login success
+			//redirecting to index page after login success
+			customHistory.push('/');
 		})
 		.catch((err) => {
-			console.log(err);
-			dispatch({
-				type: SET_ERRORS,
-				payload: err.response.data
-			});
+			if (err.response) {
+				// Request made and server responded
+				console.log(err.response.data);
+				console.log(err.response.status);
+				console.log(err.response.headers);
+
+				dispatch({
+					type: SET_ERRORS,
+					payload: (err.respsonse.status)
+				});
+			} else if (err.request) {
+				// The request was made but no response was received
+				console.log(err.request);
+				dispatch({
+					type: SET_ERRORS,
+					payload: (err.request.status)
+				});
+			} else {
+				// Something happened in setting up the request that triggered an Error
+				console.log('Error', err.message);
+			}
+
 		});
 }
 //for fetching authenticated user information
