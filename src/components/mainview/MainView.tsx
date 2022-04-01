@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	Link,
 	Outlet,
@@ -7,48 +7,25 @@ import {
 } from "react-router-dom";
 
 import logo from "assets/img/streamaccess-logos/streamaccess-logos-transparent.png";
-import { Home, Video, Music, Settings, Smile } from "react-feather";
+import { Home, Video, LogOut } from "react-feather";
 import './MainView.scss'
 import routes from "../../utils/routes";
 import Header from '../header/Header';
-
+import { logoutUser } from '../../state/actions/authActions'
 
 const iconSize = 19;
-const navItems = [
-	{
-		label:'Home',
-		icon: () => <Home className="" size={iconSize} color="white" />,
-		path: "/",
 
-	},
-	{
-		label: "Video",
-		icon: () => <Video className="" size={iconSize} color="white" />,
-		path: routes.video,
+type LogoutProps = {
+	className?: string,
+	size: number,
+	color: string,
+}
 
-	}]/*,
-	{
-		label: "Audio Sources",
-		icon: () => <Music className="" size={iconSize} color="white" />,
-		path: "",
-		link: <Link to="/app">Audio</Link>
-	},
-	{
-		label: "Manage Source",
-		icon: () => <Smile className="" size={iconSize} color="white" />,
-		path: "",
-		link: <Link to="/app">My Profile</Link>
-	},
-	{
-		label: "Settings",
-		icon: () => <Settings className="" size={iconSize} color="white" />,
-		path: "",
-		link: <Link to="/app">Settings</Link>
-	},
-
-
-];*/
-
+const LogOutFC: FC<LogoutProps> = ({ className, size, color }: LogoutProps) => {
+	return (
+		<LogOut className={className} size={iconSize} color={color} />
+	)
+}
 
 
 
@@ -56,14 +33,16 @@ type NavButtonProps = {
 	label: string,
 	path: string,
 	icon: () => React.ReactNode,
+	onClick?: () => void,
 }
 
-const NavButton: FC<NavButtonProps> = ({ label, path, icon}: NavButtonProps) => {
+const NavButton: FC<NavButtonProps> = ({ label, path, icon, onClick }: NavButtonProps) => {
 	const { pathname } = useLocation();
-	console.log(pathname);
+
 	return (
-		<Link to={path} className={`navButton  ${(pathname === path) ? "bg-slate-700" : "bg-blackBg"} hover:bg-darkslategray rounded-lg
-		hover:shadow flex flex-row items-center content-center px-2 mx-2 py-2 m-2`}>
+		<Link to={path !== "/logout" ? path : "#"} className={`navButton  ${(pathname === path) ? "bg-slate-700" : "bg-blackBg"} hover:bg-darkslategray rounded-lg
+		hover:shadow flex flex-row items-center content-center px-2 mx-2 py-2 m-2`}
+			onClick={onClick}>
 			<div className="pr-1">
 				{icon()}
 			</div>
@@ -72,40 +51,62 @@ const NavButton: FC<NavButtonProps> = ({ label, path, icon}: NavButtonProps) => 
 	)
 }
 
+
 export default function MainView() {
 	const { sideBarVisibility } = useSelector((state: RootState) => state.ui);
+	const dispatch = useDispatch();
+
+	const navItems = [
+		{
+			label: 'Home',
+			icon: () => <Home className="" size={iconSize} color="white" />,
+			path: "/",
+
+		},
+		{
+			label: "Video",
+			icon: () => <Video className="" size={iconSize} color="white" />,
+			path: routes.video,
+
+		},
+		{
+			label: "Logout",
+			icon: () => <LogOutFC className="" size={iconSize} onClick color="white" />,
+			path: "/logout",
+			onClick: () => dispatch(logoutUser())
+		}];
 
 	return (
 		<div className="flex flex-col h-screen">
 			<Header className="w-full" />
 
 			{/* Sidebar starts */}
-			
+
 			<div className="flex flex-grow rounded-full">
-			{ sideBarVisibility && (
-				<div style={{}} className="w-64 z-20 absolute md:relative bg-blackBg shadow h-full flex-col justify-between sm:flex">
-					<div className="logo mt-5">
-						<img style={{
-							"objectFit": "contain"
-						}} src={logo} alt="Logo" />
+				{sideBarVisibility && (
+					<div style={{}} className="w-64 z-20 absolute md:relative bg-blackBg shadow h-full flex-col justify-between sm:flex">
+						<div className="logo mt-5">
+							<img style={{
+								"objectFit": "contain"
+							}} src={logo} alt="Logo" />
 
-					</div>
+						</div>
 
 
-					<nav className="navItems flex flex-col">
-						{
-							navItems.map((navItem, indx) => (
-								<NavButton key={indx} label={navItem.label} icon={navItem.icon} path={navItem.path} link={navItem.link} />
-							))
-						}
+						<nav className="navItems flex flex-col">
+							{
+								navItems.map((navItem, indx) => (
+									<NavButton key={indx} label={navItem.label} icon={navItem.icon} path={navItem.path} onClick={navItem.onClick} />
+								))
+							}
 
-					</nav>
+						</nav>
 
-					<div className="mb-auto">
-						{ }
-					</div>
+						<div className="mb-auto">
+							{ }
+						</div>
 
-				</div>)
+					</div>)
 				}
 
 				<div className="container mx-auto">
