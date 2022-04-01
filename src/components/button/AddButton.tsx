@@ -1,14 +1,14 @@
-import React, {ReactChild, ReactChildren } from 'react';
+import React from 'react';
 
 import {PlusCircle} from 'react-feather';
 
 type AddButtonProps = {
-    className: string,
-    href: string,
+    className?: string,
+    href?: string,
     isActive?: boolean,
     label: string,
     type?: string,
-    children: ReactChild | ReactChildren
+
 }
 
 export default function AddButton({className, label}: AddButtonProps) {
