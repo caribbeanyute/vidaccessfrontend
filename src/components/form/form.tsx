@@ -39,14 +39,7 @@ const FormW: FC<FormProps> = ({ stream, isLive }: FormProps) => {
 	const [streamError, setStreamError] = useState<boolean>(false);
 	const dispatch = useDispatch();
 	const inputHighlight = "focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none transition ease-in-out";
-	const handleMouseOver = () => {
-		setIsHovering(true);
-	};
 
-	const handleMouseOut = () => {
-		setIsHovering(false);
-		// onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}
-	};
 
 	const setStream = () => {
 
@@ -102,7 +95,7 @@ const FormW: FC<FormProps> = ({ stream, isLive }: FormProps) => {
 							) : null}
 						</div>
 						<div className="flex items-center justify-between">
-							<AddButton onClick={submitForm} label='Add Stream' />
+							<AddButton label='Add Stream' />
 						</div>
 					</Form>
 				)}

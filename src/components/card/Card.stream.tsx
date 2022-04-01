@@ -16,19 +16,11 @@ const CardStream: FC<CardStreamProps> = ({ stream, isLive }: CardStreamProps) =>
   const [streamError, setStreamError] = useState<boolean>(false);
   const dispatch = useDispatch();
 
-  const handleMouseOut = () => {
-    setIsHovering(false);
-    // onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}
-  };
-
   const setStream = () => {
-
     dispatch(setCurrentStream(stream));
     dispatch(setVideoSrc());
-
   }
 
-  <img className="h-full w-full relative" src="https://api.lorem.space/image/album?w=40&h=10" alt="Sunset in the mountains" />
   return (
 
     <div className={`max-w-sm w-72 h-48 rounded overflow-hidden shadow-lg 
