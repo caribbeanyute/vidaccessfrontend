@@ -3,7 +3,7 @@ import React, { Suspense, useState } from "react";
 import { createRoot } from 'react-dom/client';
 import { render } from "react-dom";
 import { Provider } from 'react-redux';
-import axios from "axios";
+
 
 
 // Root style
@@ -16,7 +16,7 @@ import { CustomRouter } from "./utils/CustomRouter";
 import customHistory from "./utils/history";
 import routes from "./utils/routes";
 
-axios.defaults.baseURL = "/api";
+
 
 import App from "./App";
 import ProtectedRoute from "./ProtectedRoute";

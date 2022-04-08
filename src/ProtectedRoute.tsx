@@ -1,10 +1,14 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
+import LocalStorageService from './utils/LocalStorageService'
+
+const localStorageService = LocalStorageService.getService();
 
 const useAuth = () => {
   //const user = localStorage.getItem('user')
-  const user = localStorage.getItem('token')
-  return !!user;
+
+  const token = localStorageService.getAccessToken();
+  return !!token;
 }
 
 const ProtectedRoute = (props: any) => {

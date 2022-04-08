@@ -1,5 +1,5 @@
 import { LOADING_STREAMS,SET_STREAMS,ERROR_LOADING_STREAMS,SET_CURRENT_STREAM } from "../types/stream";
-import axios from "axios";
+import axios from '../../utils/AxiosClient';
 import customHistory from "../../utils/history";
 import routes from "../../utils/routes";
 

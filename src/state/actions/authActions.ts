@@ -1,17 +1,23 @@
-import axios from 'axios';
+import axios from '../../utils/AxiosClient';
 import { SET_USER, SET_ERRORS, LOADING_UI, CLEAR_ERRORS, SET_UNAUTHENTICATED, LOADING_USER } from '../types/auth'
 import customHistory from '../../utils/history';
 
+
+import LocalStorageService from '../../utils/LocalStorageService';
+const localStorageService = LocalStorageService.getService();
 
 export const loginUser = (userData: any) => (dispatch: any) => {
 	dispatch({ type: CLEAR_ERRORS })
 	dispatch({ type: LOADING_UI })
 
-	axios.post('api/auth/login', userData, {timeout:5000})
+
+
+	axios.post('api/auth/login', userData)
 		.then((res) => {
-			const token = `Bearer ${res.data["jwt-token"]}`;
-			localStorage.setItem('token', token);//setting token to local storage
-			axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
+			const token = res.data["jwt-token"];
+			localStorageService.setToken({ access_token: token, refresh_token: null });
+
+
 			dispatch(getUserData());
 			//dispatch({ type: CLEAR_ERRORS });
 			console.log('success');
@@ -59,8 +65,7 @@ export const getUserData = () => (dispatch: any) => {
 }
 export const logoutUser = () => (dispatch: any) => {
 	console.log('logout');
-	localStorage.removeItem('token');
-	delete axios.defaults.headers.common['Authorization']
+	localStorageService.clearToken();
 	dispatch({
 		type: SET_UNAUTHENTICATED
 	});
