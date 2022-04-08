@@ -15,7 +15,8 @@ const config = {
   output: {
     path: path.join(__dirname, 'build'),
     filename: "bundle.js",
-    publicPath: '/'
+    publicPath: '/',
+    clean: true
   },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".css"],
@@ -76,7 +77,7 @@ if (isProd) {
 } else {
   config.devServer = {
     allowedHosts: 'all',
-    host: '0.0.0.0',
+    host: 'localhost',
     port: 3000,
     open: true,
     hot: true,
