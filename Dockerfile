@@ -1,12 +1,13 @@
-FROM nginx:alpine
+FROM node:16-alpine as build
 
 WORKDIR /app
+COPY package*.json package-lock.json ./
+RUN npm install
+COPY public public
+COPY src src
+COPY . .
+RUN npm run build
 
-COPY ./build ./build
-
-#COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY nginx.conf.template /etc/nginx/nginx.conf.template
-
-COPY docker-entrypoint.sh /
-ENTRYPOINT ["sh", "/docker-entrypoint.sh"]
-CMD ["nginx", "-g", "daemon off;"]
+FROM nginx:alpine
+COPY nginx/templates /etc/nginx/templates/
+COPY --from=build /app/build /usr/share/nginx/html
