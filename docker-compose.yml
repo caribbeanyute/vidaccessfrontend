@@ -18,4 +18,4 @@ services:
             - SRS_PUBLISH_URL=${SRS_PUBLISH_URL}
         restart: always
         ports:
-          - "8081:8080"
+          - "8081:80"
