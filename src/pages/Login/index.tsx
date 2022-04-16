@@ -34,7 +34,7 @@ const errorMessageOptions: { "0": { a: string; b: string }; "401": { a: string; 
 
 const errorMessage = Object.assign({}, default_error, errorMessageOptions)
 
-const LoginSchema = Yup.object().shape(/*{
+const LoginSchema = Yup.object().shape({
     username: Yup.string().min(2, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
@@ -42,7 +42,7 @@ const LoginSchema = Yup.object().shape(/*{
         .max(50, 'Too Long!')
         .required('Required'),
 
-}*/{})
+})
 
 const Login: React.FC<LoginProps> = ({UI, ...props}: LoginProps) => {
     const [error, setError] = useState<boolean>(false);
