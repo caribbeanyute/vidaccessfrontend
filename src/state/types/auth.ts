@@ -2,11 +2,19 @@ export const SET_AUTHENTICATED='SET_AUTHENTICATED';
 export const SET_UNAUTHENTICATED='SET_UNAUTHENTICATED';
 export const SET_USER='SET_USER';
 export const LOADING_USER='LOADING_USER';
+
 //UI reducer types
-export const SET_ERRORS='SET_ERRORS';
+
 export const LOADING_UI='LOADING_UI';
 export const CLEAR_ERRORS='CLEAR_ERRORS';
 
+export const LOGIN_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGIN_REQUEST = 'LOGOUT_REQUEST';
+export const LOGIN_ERROR = 'LOGOUT_ERROR';
+
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_ERROR = 'LOGOUT_ERROR';
 /*
 export const LOGIN_DATA_CLEAR = 'LOGIN_DATA_CLEAR';
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';

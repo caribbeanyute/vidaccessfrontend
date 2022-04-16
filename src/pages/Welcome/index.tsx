@@ -23,7 +23,7 @@ const Welcome: React.FC<WelcomeProps> = ({ ...props }: WelcomeProps) => {
 
 	useEffect(() => {
 		dispatch(getStreams());
-	}, [dispatch])
+	}, [dispatch]);
 
 
 
@@ -39,10 +39,10 @@ const Welcome: React.FC<WelcomeProps> = ({ ...props }: WelcomeProps) => {
 			{stream.error ? <div className='text-red-500'>{"Failed to load Streams"}</div> : (
 				<div className="pt-5 grid grid-cols-1 md:grid-cols-3 gap-2 justify-items-center">
 					{
-						stream && stream.streams.map((stream, index) => (
+						stream ? stream.streams.map((stream, index) => (
 
 							<CardStream className="user pt-3" key={index} isLive={stream.live} stream={stream} />
-						))
+						)) : <div>Loading...</div>
 					}
 
 				</div>)

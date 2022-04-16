@@ -19,7 +19,8 @@ export default function (state = initialState, action: any) {
 			return initialState;
 		case SET_STREAMS:
 			return {
-				authenticated: true,
+				...state,
+
 				loading: false,
 				streams : action.payload,
 			};

@@ -2,13 +2,15 @@
 import thunkMiddleware from 'redux-thunk';
 import {applyMiddleware, compose, createStore} from 'redux';
 import rootReducer from './reducers';
+import customHistory from '../utils/history';
 
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const configureStore = () => {
   const middleware = [];
-  middleware.push(thunkMiddleware);
+  middleware.push(thunkMiddleware.withExtraArgument({history: customHistory}));
+
 
   /*if (__DEV__) {
     const loggerMiddleware = createLogger({ collapsed: true });

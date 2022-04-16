@@ -1,13 +1,18 @@
 import axios from '../../utils/AxiosClient';
-import { SET_USER, SET_ERRORS, LOADING_UI, CLEAR_ERRORS, SET_UNAUTHENTICATED, LOADING_USER } from '../types/auth'
+import { SET_USER, LOADING_UI, CLEAR_ERRORS, SET_UNAUTHENTICATED, LOADING_USER, LOGIN_SUCCESS, LOGOUT_ERROR, LOGIN_ERROR, LOGIN_REQUEST } from '../types/auth'
 import customHistory from '../../utils/history';
 
 
+
 import LocalStorageService from '../../utils/LocalStorageService';
+import { useNavigate } from 'react-router-dom';
 const localStorageService = LocalStorageService.getService();
+
+
 
 export const loginUser = (userData: any) => (dispatch: any) => {
 	dispatch({ type: CLEAR_ERRORS })
+	dispatch({ type: LOGIN_REQUEST})
 	dispatch({ type: LOADING_UI })
 
 
@@ -19,10 +24,12 @@ export const loginUser = (userData: any) => (dispatch: any) => {
 
 
 			dispatch(getUserData());
-			//dispatch({ type: CLEAR_ERRORS });
+			dispatch({ type: LOGIN_SUCCESS });
 			console.log('success');
 			//redirecting to index page after login success
-			customHistory.push('/');
+			//customHistory.push('/');
+			//window.location.href = '/';
+			
 		})
 		.catch((err) => {
 			if (err.response) {
@@ -32,19 +39,23 @@ export const loginUser = (userData: any) => (dispatch: any) => {
 				console.log(err.response.headers);
 
 				dispatch({
-					type: SET_ERRORS,
+					type: LOGIN_ERROR,
 					payload: (err.respsonse.status)
 				});
 			} else if (err.request) {
 				// The request was made but no response was received
 				console.log(err.request);
 				dispatch({
-					type: SET_ERRORS,
+					type: LOGIN_ERROR,
 					payload: (err.request.status)
 				});
 			} else {
 				// Something happened in setting up the request that triggered an Error
 				console.log('Error', err.message);
+				/*dispatch({
+					type: LOGIN_ERROR,
+					payload: undefined
+				});*/
 			}
 
 		});
@@ -69,5 +80,6 @@ export const logoutUser = () => (dispatch: any) => {
 	dispatch({
 		type: SET_UNAUTHENTICATED
 	});
+	
 	window.location.href = '/login';//redirect to login page
 };

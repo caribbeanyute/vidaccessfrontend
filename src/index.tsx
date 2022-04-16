@@ -1,7 +1,6 @@
 import React, { Suspense, useState } from "react";
 // @ts-ignore
 import { createRoot } from 'react-dom/client';
-import { render } from "react-dom";
 import { Provider } from 'react-redux';
 
 
@@ -11,14 +10,11 @@ import './index.scss';
 //Redux
 import { store } from './state';
 //react-router
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { CustomRouter } from "./utils/CustomRouter";
-import customHistory from "./utils/history";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import routes from "./utils/routes";
 
 
 
-import App from "./App";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 //import VideoPage from "./pages/Video";
@@ -31,34 +27,36 @@ import Loading from "./components/loading/index";
 
 
 const Index = () => {
-	const [user, setUser] = useState(null);
+	// const [user, setUser] = useState(null);
 
 	return (
-	<Suspense fallback={<Loading />}>
-		<Provider store={store}>
-			<CustomRouter history={customHistory}>
-				<Routes>
-					<Route path="/" element={<PublicRoute />} >
-						<Route path={routes.login} index={true} element={<Login />} />
-						<Route path={"/load"} element={<Loading />} />
-					</Route>
-					
+		<BrowserRouter>
+			<Suspense fallback={<Loading />}>
 
-					<Route path="/" element={<ProtectedRoute />} >
-						<Route path="/" element={<Sidebar />} >
-							<Route index={true} element={<Welcome />} />
-							<Route path={routes.video} element={<VideoPage />}>
+				<Provider store={store}>
+
+					<Routes>
+						<Route path="/login" element={<PublicRoute />} >
+							<Route index={true} element={<Login />} />
+							<Route path={"/login/load"} element={<Loading />} />
+						</Route>
+
+
+						<Route path="/" element={<ProtectedRoute />} >
+							<Route path="/" element={<Sidebar />} >
+								<Route index={true} element={<Welcome />} />
+								<Route path={routes.video} element={<VideoPage />}>
+
+								</Route>
+								<Route path={routes.addStream} element={<AddStream />} />
 
 							</Route>
-							<Route path={routes.addStream} element={<AddStream />} />
-
 						</Route>
-					</Route>
-					<Route path="*" element={"Not Found"}></Route>
-				</Routes>
-			</CustomRouter>
-		</Provider>
-	</Suspense>
+						<Route path="*" element={"Not Found"}></Route>
+					</Routes>
+				</Provider>
+			</Suspense>
+		</BrowserRouter>
 	)
 };
 

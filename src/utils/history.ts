@@ -1,5 +1,5 @@
 import { createBrowserHistory } from "history";
 
-const customHistory = createBrowserHistory();
+const customHistory = createBrowserHistory({ window });
 
 export default customHistory;

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {connect, MapDispatchToProps} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import mediaplayer from './images/media_player.svg'
 import Button from '../../components/button/Button';
@@ -11,18 +12,29 @@ import * as Yup from 'yup';
 
 
 type LoginProps = {
-    UI?: object,
+    UI: {
+        loading: boolean,
+        loggedIn: boolean,
+        error: boolean,
+        errorStatus: any
+    },
     loginUser: typeof loginUser,
 }
 
-const errorMessage: { "0": { a: string; b: string }; "401": { a: string; b: string } } | null
+
+const default_error =  {"a": "Whoops 😢", "b": "Something went wrong please try again later"}
+
+
+const errorMessageOptions: { "0": { a: string; b: string }; "401": { a: string; b: string } } | null
     = {
     0: {"a": "Whoops 😢", "b": "Something went wrong please try again later"},
     401: {"a": "🔐", "b": "Incorrect username or password"}
 
 }
 
-const LoginSchema = Yup.object().shape({
+const errorMessage = Object.assign({}, default_error, errorMessageOptions)
+
+const LoginSchema = Yup.object().shape(/*{
     username: Yup.string().min(2, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
@@ -30,13 +42,13 @@ const LoginSchema = Yup.object().shape({
         .max(50, 'Too Long!')
         .required('Required'),
 
-})
-
+}*/{})
 
 const Login: React.FC<LoginProps> = ({UI, ...props}: LoginProps) => {
     const [error, setError] = useState<boolean>(false);
     const [errorMsg, setErrorMsg] = useState<typeof errorMessage>({});
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -44,7 +56,11 @@ const Login: React.FC<LoginProps> = ({UI, ...props}: LoginProps) => {
         if (UI.error) {
             setErrorMsg(errorMessage[UI.errorStatus])
         }
-        setLoading(UI.loading);
+
+        if(UI.loggedIn){
+            navigate('/');
+        }
+        
     }, [UI])
 
     const handleSubmit = (values: object) => {

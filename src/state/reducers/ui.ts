@@ -9,7 +9,7 @@ export default function (state = initialState, action: any) {
 		case TOGGLE_SIDEBAR:
 			return {
 				...state,
-				sideBarVisibility: state.sideBarVisibility ? false : true,
+				sideBarVisibility: !(state.sideBarVisibility),
 				errors: action.payload
 			};
 		default:
