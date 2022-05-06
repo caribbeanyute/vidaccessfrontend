@@ -3,6 +3,7 @@ import { connect, MapDispatchToProps, MapStateToProps, useDispatch, useSelector 
 import { getStreams, setCurrentStream, setVideoSrc } from '../../state/actions/streamActions';
 import { Play } from 'react-feather';
 import Thumbnail from '../../components/thumbnail/thumbnail';
+import { useNavigate } from 'react-router-dom';
 
 
 type CardStreamProps = {
@@ -15,10 +16,13 @@ type CardStreamProps = {
 const CardStream: FC<CardStreamProps> = ({ stream, isLive }: CardStreamProps) => {
   const [streamError, setStreamError] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const setStream = () => {
     dispatch(setCurrentStream(stream));
     dispatch(setVideoSrc());
+    //navigate('/video');
+
   }
 
   return (
@@ -28,11 +32,11 @@ const CardStream: FC<CardStreamProps> = ({ stream, isLive }: CardStreamProps) =>
       onClick={setStream} >
 
       <div className="relative w-full h-2/3" >
-        <span className={`absolute right-0 top-2 inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white ${isLive ? 'bg-red-600' : 'bg-black'} rounded-full`}>{isLive ? 'LIVE' : 'DOWN'}</span>
+	<span className={`absolute right-0 top-2 inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white ${isLive ? 'bg-red-600' : 'bg-black'} rounded-full`}>{isLive ? 'LIVE' : 'DOWN'}</span>
         {
           isLive ?
           (<Thumbnail className='h-full w-full hover:hidden' thumbnailApiUrl='/thumbnail/' stream={stream} />):
-          <div className='pt-2 absolute top-3 left-0'>
+          <div className='pt-5 absolute top-3 left-0 px-3'>
           {`Stream not live, to begin publish to ${process.env.SRS_PUBLISH_URL}${stream.streamCode}`}
           <div className='opacity-0 hover:opacity-100'>
             {`${stream.streamKey}`}
