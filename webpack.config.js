@@ -106,7 +106,14 @@ if (isProd) {
         pathRewrite: {"^/api":"" }
         //rewrite: function (path, req) { return path.replace(/\/(.*?)/g, '') }
 
-      }
+      },
+      /*
+      "/ws/**": {
+        target: "http://172.29.208.1:3000/",
+        secure: false,
+        ws: true,
+        //changeOrigin: true,
+      }*/
     }
 
   };
