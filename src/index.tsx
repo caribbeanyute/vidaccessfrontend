@@ -13,50 +13,54 @@ import { store } from './state';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import routes from "./utils/routes";
 
+import customHistory from "./utils/history";
+
 
 
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
-//import VideoPage from "./pages/Video";
-const VideoPage = React.lazy(() => import("./pages/Video"));
+import VideoPage from "./pages/Video";
+//const VideoPage = React.lazy(() => import("./pages/Video"));
 const Login = React.lazy(() => import("./pages/Login"));
-const Welcome = React.lazy(() => import("./pages/Welcome"));
+import Welcome from "./pages/Welcome";
 const Sidebar = React.lazy(() => import("./components/mainview/MainView"));
-const AddStream = React.lazy(() => import("./pages/AddStream"));
+import AddStream from "./pages/AddStream";
 import Loading from "./components/loading/index";
+import { CustomRouter } from "./utils/CustomRouter";
 
 
 const Index = () => {
 	// const [user, setUser] = useState(null);
-
+// TODO reimplement Suspense loading
 	return (
-		<BrowserRouter>
-			<Suspense fallback={<Loading />}>
 
-				<Provider store={store}>
+		<Provider store={store}>
+			<CustomRouter history={customHistory}>
+			{/*<BrowserRouter>*/}
+				<Routes>
+					<Route path="/login" element={<PublicRoute />} >
+						<Route index={true} element={<Login />} />
+						<Route path={"/login/load"} element={<Loading />} />
+					</Route>
 
-					<Routes>
-						<Route path="/login" element={<PublicRoute />} >
-							<Route index={true} element={<Login />} />
-							<Route path={"/login/load"} element={<Loading />} />
-						</Route>
 
-
-						<Route path="/" element={<ProtectedRoute />} >
-							<Route path="/" element={<Sidebar />} >
-								<Route index={true} element={<Welcome />} />
-								<Route path={routes.video} element={<VideoPage />}>
-
-								</Route>
-								<Route path={routes.addStream} element={<AddStream />} />
+					<Route path="/" element={<ProtectedRoute />} >
+						<Route path="/" element={<Sidebar />} >
+							<Route index={true} element={<Welcome />} />
+							<Route path={routes.video} element={<VideoPage />}>
 
 							</Route>
+							<Route path={routes.addStream} element={<AddStream />} />
+
 						</Route>
-						<Route path="*" element={"Not Found"}></Route>
-					</Routes>
-				</Provider>
-			</Suspense>
-		</BrowserRouter>
+					</Route>
+					<Route path="*" element={"Not Found"}></Route>
+				</Routes>
+			</CustomRouter>
+		</Provider>
+
+
+
 	)
 };
 
