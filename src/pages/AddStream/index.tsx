@@ -24,9 +24,7 @@ const AddStream: React.FC<AddStreamProps> = ({ UI, ...props }: AddStreamProps) =
 
 
 	return (
-		<div className="0">
-			<Form />
-		</div>
+		<Form />
 	)
 }
 
