@@ -42,7 +42,7 @@ const VideoJS = ( props ) => {
 
   return (
     <div data-vjs-player>
-      <video ref={videoRef} className="video-js vjs-big-play-centered " />
+      <video ref={videoRef} className="video-js vjs-default-skin"  />
     </div>
   );
 }
