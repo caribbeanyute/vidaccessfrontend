@@ -6,8 +6,7 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
 type FormProps = {
-	stream: any,
-	isLive: boolean,
+
 
 }
 
@@ -28,12 +27,16 @@ const StreamSchema = Yup.object().shape({
 		.min(2, 'Too Short!')
 		.max(50, 'Too Long!')
 		.required('Required'),
+	streamKey: Yup.string()
+		.min(2, 'Too Short!')
+		.max(50, 'Too Long!')
+		.required('Required'),
 	//email: Yup.string().email('Invalid email').required('Required'),
 });
 
 
 
-const FormW: FC<FormProps> = ({ stream, isLive }: FormProps) => {
+const FormW: FC<FormProps> = ({  }: FormProps) => {
 	const [isHovering, setIsHovering] = useState<boolean>(false);
 	const [value, setValue] = useState<string>("default");
 	const [streamError, setStreamError] = useState<boolean>(false);
@@ -41,12 +44,7 @@ const FormW: FC<FormProps> = ({ stream, isLive }: FormProps) => {
 	const inputHighlight = "focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none transition ease-in-out";
 
 
-	const setStream = () => {
 
-		dispatch(setCurrentStream(stream));
-		dispatch(setVideoSrc());
-
-	}
 
 	return (
 		<div className="w-full max-w-md mx-auto mt-9">
