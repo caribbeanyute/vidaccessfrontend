@@ -29,7 +29,7 @@ const Welcome: React.FC<WelcomeProps> = ({ ...props }: WelcomeProps) => {
 
 
 	return (
-		<div className="flex flex-col mt-10 px-6 h-5/6 rounded border-dashed border-2 border-gray-300">
+		<div className="flex flex-col px-6 w-full h-full rounded border-dashed border-2 border-gray-300">
 			<div className='flex flex-row justify-items-center mt-2'>
 				<div className='font-face-rb text-black text-xl md:text-2xl place-self-start'>Streams</div>
 				<Link to={routes.addStream} className='ml-auto'>
