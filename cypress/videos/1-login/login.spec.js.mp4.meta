@@ -1,0 +1,31 @@
+;FFMETADATA1
+[CHAPTER]
+TIMEBASE=1/1000
+START=24108
+END=26772
+title=login-load displays redirects to login
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=login-load can add new todo items
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=login-load can check off an item as completed
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=login-load with a checked task can filter for uncompleted tasks
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=login-load with a checked task can filter for completed tasks
+[CHAPTER]
+TIMEBASE=1/1000
+START=0
+END=null
+title=login-load with a checked task can delete all completed tasks
