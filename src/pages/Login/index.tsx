@@ -118,7 +118,7 @@ const Login: React.FC<LoginProps> = ({UI, ...props}: LoginProps) => {
                                 <Field
                                     name='password'
                                     type='password'
-                                    placeholder='username'
+                                    placeholder='password'
                                     className={`text-black py-2 px-4 mt-4 rounded-full outline outline-offset-2 outline-1 ${errors.password ? "outline-red-500" : "outline-gray-900"} `}
                                     as=''
 

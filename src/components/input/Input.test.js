@@ -4,7 +4,7 @@ import Input from './Input';
 
 test('Link changes the class when hovered', () => {
   const component = renderer.create(
-    <Link page="http://www.facebook.com">Facebook</Link>,
+    <Input page="http://www.facebook.com">Facebook</Input>,
   );
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();

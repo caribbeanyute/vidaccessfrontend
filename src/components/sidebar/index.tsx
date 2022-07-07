@@ -79,7 +79,7 @@ function Sidebar() {
 		}];
 
 	return (
-		<div style={{}} className="w-48 md:w-64 z-20 relative md:absolute bg-blackBg shadow h-full flex-col justify-between">
+		<div style={{}} className="w-48 md:w-64 z-20 absolute md:relative bg-blackBg shadow h-full flex-col justify-between">
 			<div className="logo mt-5">
 				<img style={{
 					"objectFit": "contain"

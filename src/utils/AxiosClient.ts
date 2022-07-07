@@ -24,7 +24,7 @@ axiosInstance.interceptors.request.use(
 		console.log(error)
 	});
 
-axiosInstance.interceptors.response.use((response) => {
+/* axiosInstance.interceptors.response.use((response) => {
 		return response
 	  }, async function (error) {
 		const originalRequest = error.config;
