@@ -18,7 +18,7 @@ const Header: FC<HeaderProps> = ({ className }: HeaderProps) => {
 	}
 
 	return (
-		<nav className={`bg-blackBg border-gray-200 px-2 sm:px-4 py-1 dark:bg-gray-800 ${className}`}>
+		<nav className={`bg-gray-800 border-gray-200 px-2 sm:px-4 py-1 dark:bg-gray-800 ${className}`}>
 			<div className="container flex flex-wrap justify-between items-center mr-auto">
 
 				<button onClick={onToggleSidebar} data-collapse-toggle="mobile-menu-3" type="button" className="inline-flex items-center cursor-pointer p-2 ml-3 text-sm text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-3" aria-expanded="false">
