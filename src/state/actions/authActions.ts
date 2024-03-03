@@ -1,6 +1,6 @@
 import axios from '../../utils/AxiosClient';
 import { SET_USER, LOADING_UI, CLEAR_ERRORS, SET_UNAUTHENTICATED, LOADING_USER, LOGIN_SUCCESS, LOGOUT_ERROR, LOGIN_ERROR, LOGIN_REQUEST } from '../types/auth'
-import customHistory from '../../utils/history';
+import customHistory from '../../utils/historyObj';
 
 
 
@@ -25,7 +25,6 @@ export const loginUser = (userData: any) => (dispatch: any) => {
 
 			dispatch(getUserData());
 			dispatch({ type: LOGIN_SUCCESS });
-			console.log('success');
 			//redirecting to index page after login success
 			//customHistory.push('/');
 			//window.location.href = '/';
@@ -34,24 +33,23 @@ export const loginUser = (userData: any) => (dispatch: any) => {
 		.catch((err) => {
 			if (err.response) {
 				// Request made and server responded
-				console.log(err.response.data);
-				console.log(err.response.status);
-				console.log(err.response.headers);
+				//console.log(err.response);
+		
 
 				dispatch({
 					type: LOGIN_ERROR,
-					payload: (err.respsonse.status)
+					payload: (err.response.status)
 				});
 			} else if (err.request) {
 				// The request was made but no response was received
-				console.log(err.request);
+				//console.log(err.request);
 				dispatch({
 					type: LOGIN_ERROR,
 					payload: (err.request.status)
 				});
 			} else {
 				// Something happened in setting up the request that triggered an Error
-				console.log('Error', err.message);
+				//console.log('Error', err.message);
 				/*dispatch({
 					type: LOGIN_ERROR,
 					payload: undefined

@@ -1,4 +1,4 @@
-import customHistory from './history';
+import customHistory from './historyObj';
 import LocalStorageService from './LocalStorageService';
 const axios = require('axios');
 

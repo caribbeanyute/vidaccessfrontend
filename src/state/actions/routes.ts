@@ -1,4 +1,4 @@
-import customHistory  from '../../utils/history';
+import customHistory  from '../../utils/historyObj';
 
 // Route for components
 // export const notifications = () => dispatch => customHistory.push('/notifications');

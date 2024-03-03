@@ -2,7 +2,7 @@
 import thunkMiddleware from 'redux-thunk';
 import {applyMiddleware, compose, createStore} from 'redux';
 import rootReducer from './reducers';
-import customHistory from '../utils/history';
+import customHistory from '../utils/historyObj';
 
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

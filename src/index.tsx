@@ -13,7 +13,7 @@ import { store } from './state';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import routes from "./utils/routes";
 
-import customHistory from "./utils/history";
+import customHistory from "./utils/historyObj";
 
 
 
